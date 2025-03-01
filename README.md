@@ -1,8 +1,123 @@
+# FR
+# Script d'Installation de Conteneurs de Sécurité
+
+[![Licence](https://img.shields.io/badge/Licence-MIT-blue.svg)](LICENSE)
+
+Un script Bash complet pour la mise en place d'un environnement de sécurité personnalisé avec des conteneurs Docker pour Firefox, Kali Linux et Splunk.
+
+## Aperçu
+
+Ce script automatise le déploiement d'un environnement conteneurisé axé sur la sécurité. Il installe et configure :
+
+- Un conteneur Firefox pour une navigation sécurisée
+- Un conteneur Kali Linux pour les tests de pénétration et l'évaluation de la sécurité
+- Un conteneur Splunk pour l'analyse des logs et la surveillance
+
+Le script gère les dépendances, la création d'utilisateurs, la configuration des répertoires et la configuration appropriée des conteneurs.
+
+## Cas d'Utilisation Personnel
+
+J'utilise personnellement cette configuration sur Portainer qui s'exécute sur mon hyperviseur Proxmox. Ce projet me permet de tester des machines vulnérables et de les surveiller dans un environnement contrôlé. C'est particulièrement utile pour la recherche en sécurité, la pratique des tests de pénétration et l'apprentissage des capacités SIEM avec Splunk, tout en gardant tout conteneurisé et isolé de mes systèmes principaux.
+
+## Fonctionnalités
+
+- **Configuration Automatisée de l'Environnement** : Installation complète avec une seule commande
+- **Gestion des Erreurs** : Messages d'erreur et logs colorés
+- **Vérifications de Sécurité** : Validation des ports, des fichiers de configuration, et plus encore
+- **Sauvegarde de Configuration** : Sauvegarde automatique des configurations existantes
+- **Validation des Ressources** : Vérification des dépendances, de l'espace disque et de l'état de Docker
+
+## Prérequis
+
+- Système Linux basé sur Debian (Ubuntu, Debian, etc.)
+- Accès root
+- Connexion Internet pour télécharger les images Docker
+
+Le script installera automatiquement les dépendances manquantes :
+- Docker et Docker Compose
+- curl, wget, netstat
+
+## Installation
+
+1. Clonez le dépôt :
+```bash
+git clone https://github.com/AnisHanniz/conteneurs-securite.git
+cd conteneurs-securite
+```
+
+2. Rendez le script exécutable :
+```bash
+chmod +x script.sh
+```
+
+3. Exécutez le script en tant que root :
+```bash
+sudo ./script.sh
+```
+
+## Accès aux Services
+
+Après l'installation, vous pouvez accéder aux services à :
+
+| Service | URL | Identifiants par défaut |
+|---------|-----|-------------------------|
+| Firefox | http://localhost:3000 | Mot de passe : securefox |
+| Kali Linux | http://localhost:3001 | Mot de passe : kalipass |
+| Splunk | http://localhost:8001 | Nom d'utilisateur : admin<br>Mot de passe : secSplunkP@ss |
+
+## Structure des Répertoires
+
+Le script met en place la structure de répertoires suivante :
+
+```
+/opt/security/
+├── firefox/
+│   ├── config/
+│   └── data/
+├── kali/
+│   ├── config/
+│   └── data/
+└── splunk/
+    ├── config/
+    └── data/
+```
+
+## Considérations de Sécurité
+
+- Le script crée un utilisateur dédié `secuser` pour exécuter les conteneurs
+- Les mots de passe par défaut sont définis dans le fichier docker-compose - changez-les après la première connexion
+- Des sauvegardes des configurations existantes sont créées automatiquement
+
+## Dépannage
+
+- Vérifiez l'état des conteneurs Docker : `docker-compose ps`
+- Consultez les logs des conteneurs : `docker-compose logs [nom-service]`
+- Assurez-vous que tous les ports requis (3000, 3001, 8001, 8444) sont disponibles
+- Vérifiez que le service Docker est en cours d'exécution : `systemctl status docker`
+
+## Licence
+
+Ce projet est sous licence MIT - voir le fichier LICENSE pour plus de détails.
+
+## Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à soumettre une Pull Request.
+
+
+# ENG
 # Security Containers Setup Script
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A comprehensive Bash script for setting up a customized security environment with Docker containers for Firefox, Kali Linux, and Splunk.
+
+## Overview
+This script automates the deployment of a security-focused containerized environment. It installs and configures:
+
+-Firefox container for secure browsing
+-Kali Linux container for penetration testing and security assessment
+-Splunk container for log analysis and monitoring
+-The script handles dependencies, user creation, directory setup, and proper container configuration.
 
 ## Personal Use Case
 
